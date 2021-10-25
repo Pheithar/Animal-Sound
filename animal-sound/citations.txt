@@ -1,0 +1,2 @@
+When using this dataset please use the following citation and pay attention to the rights documented in rights.txt:
+Museum für Naturkunde Berlin. Animal Sound Archive. Occurrence dataset https://doi.org/10.15468/0bpalr accessed via GBIF.org on 2021-10-11.

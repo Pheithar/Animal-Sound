@@ -1,0 +1,3 @@
+
+Dataset: Animal Sound Archive
+Rights as supplied: http://creativecommons.org/licenses/by/4.0/legalcode
