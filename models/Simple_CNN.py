@@ -46,10 +46,11 @@ class SimpleCNN(nn.Module):
         # Flatten
         self.flatten = nn.Flatten()
 
-    def forward(self, x_img):
-        x = x_img.permute(0, 3, 1, 2)
+        # Floaty type
+        self.float()
 
-        print(x.shape)
+    def forward(self, x_img):
+        x = x_img
 
         x = self.relu(self.pool(self.conv1(x)))
         x = self.relu(self.pool(self.conv2(x)))
@@ -82,8 +83,16 @@ class SimpleCNN(nn.Module):
                 optimizer.zero_grad()
 
                 # Forward, backward and around
-                print(inputs.shape)
                 outputs = self(inputs)
+                print(outputs.shape, labels.shape)
+                loss = criterion(outputs, labels)
+                loss.backward()
+                optimizer.step()
 
-                break
-            break
+                running_loss += loss.data.item()
+                if i % 1000 == 999:
+                    print('[%d, %5d] loss: %.3f' %
+                        (epoch + 1, i + 1, running_loss / 1000))
+                    running_loss = 0.0
+        print("Finished training")
+
