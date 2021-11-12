@@ -1,0 +1,51 @@
+SimpleCNN2out:
+  conv_channels:
+    - 8
+    - 16
+    - 32
+    - 16
+    - 8
+    - 4
+  conv_kernel_size:
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+  pooling_size:
+    - [2, 2]
+    - [2, 2]
+    - [2, 2]
+    - [2, 2]
+    - [2, 2]
+    - [2, 2]
+  linear_features:
+    - 64
+  last_layer_activation: Softmax(dim=0)
+
+SimpleCNN1out:
+  conv_channels:
+    - 8
+    - 16
+    - 32
+    - 16
+    - 8
+    - 4
+  conv_kernel_size:
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+  pooling_size:
+    - [2, 2]
+    - [2, 2]
+    - [2, 2]
+    - [2, 2]
+    - [2, 2]
+    - [2, 2]
+  linear_features:
+    - 64
+  last_layer_activation: Sigmoid()

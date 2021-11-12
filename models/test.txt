@@ -1,0 +1,18 @@
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 1.38
+	 Train Accuracy: 0.68
+	 Validation Loss: 1.38
+	 Validation Accuracy: 0.72
+-------------------------------------------
+Epoch 3:
+	 Train Loss: 1.29
+	 Train Accuracy: 0.80
+	 Validation Loss: 1.30
+	 Validation Accuracy: 0.78
+-------------------------------------------
+Epoch 5:
+	 Train Loss: 1.27
+	 Train Accuracy: 0.82
+	 Validation Loss: 1.28
+	 Validation Accuracy: 0.79
