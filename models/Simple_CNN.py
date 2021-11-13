@@ -193,7 +193,12 @@ class SimpleCNN(nn.Module):
         acc_ax.plot(plot_epochs_val, val_acc, label="Validation Accuracy")
         acc_ax.set_xlabel("Epochs")
         acc_ax.set_ylabel("Percentage")
-        acc_ax.set_xticks(plot_epochs_train)
+
+
+        # Not tested yet
+        step = int(len(plot_epochs_train) // 10)
+
+        acc_ax.set_xticks(range(1, len(plot_epochs_train), step))
         acc_ax.legend()
 
         if plot_file:
