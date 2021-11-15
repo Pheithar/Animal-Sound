@@ -99,7 +99,7 @@ class SpectrogramDataset(Dataset):
             image = NormalizeData(image.numpy())
             ax.imshow(image)
             ax.axis("off")
-            ax.set_title(self.get_label(idx))
+            ax.set_title(f"Label={self.get_label(idx)}, idx: {idx}")
 
         plt.axis("off")
 
