@@ -1,0 +1,112 @@
+net_organization:
+  phylum:
+    class_Arthropoda:
+      - family_Arachnida
+      - family_Insecta
+    class_Chordata:
+      - family_Actinopterygii
+      - family_Amphibia
+      - family_Aves
+      - family_Mammalia
+      - family_Reptilia
+
+net_architecture:
+  phylum:
+    input_shape: [3, 1024, 256]
+    conv_channels: [8, 16, 32, 16, 8, 4]
+    conv_kernel_size: [2, 2, 2, 2, 2, 2]
+    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+    conv_dropout: 0.0, 0.0, 0.2, 0.2, 0.0, 0.0
+    linear_features: [64, 2]
+    linear_dropout: [0.4]
+    last_layer_activation: Softmax(dim=0)
+
+  class_Arthropoda:
+    input_shape: [3, 1024, 256]
+    conv_channels: [8, 16, 32, 16, 8, 4]
+    conv_kernel_size: [2, 2, 2, 2, 2, 2]
+    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+    conv_dropout: 0.0, 0.0, 0.2, 0.2, 0.0, 0.0
+    linear_features: [64, 2]
+    linear_dropout: [0.4]
+    last_layer_activation: Softmax(dim=0)
+
+  family_Arachnida:
+    input_shape: [3, 1024, 256]
+    conv_channels: [8, 16, 32, 16, 8, 4]
+    conv_kernel_size: [2, 2, 2, 2, 2, 2]
+    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+    conv_dropout: 0.0, 0.0, 0.2, 0.2, 0.0, 0.0
+    linear_features: [64, 1]
+    linear_dropout: [0.4]
+    last_layer_activation: Softmax(dim=0)
+
+  family_Insecta:
+    input_shape: [3, 1024, 256]
+    conv_channels: [8, 16, 32, 16, 8, 4]
+    conv_kernel_size: [2, 2, 2, 2, 2, 2]
+    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+    conv_dropout: 0.0, 0.0, 0.2, 0.2, 0.0, 0.0
+    linear_features: [64, 14]
+    linear_dropout: [0.4]
+    last_layer_activation: Softmax(dim=0)
+
+  class_Chordata:
+    input_shape: [3, 1024, 256]
+    conv_channels: [8, 16, 32, 16, 8, 4]
+    conv_kernel_size: [2, 2, 2, 2, 2, 2]
+    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+    conv_dropout: 0.0, 0.0, 0.2, 0.2, 0.0, 0.0
+    linear_features: [64, 5]
+    linear_dropout: [0.4]
+    last_layer_activation: Softmax(dim=0)
+
+  family_Actinopterygii:
+    input_shape: [3, 1024, 256]
+    conv_channels: [8, 16, 32, 16, 8, 4]
+    conv_kernel_size: [2, 2, 2, 2, 2, 2]
+    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+    conv_dropout: 0.0, 0.0, 0.2, 0.2, 0.0, 0.0
+    linear_features: [64, 5]
+    linear_dropout: [0.4]
+    last_layer_activation: Softmax(dim=0)
+
+  family_Amphibia:
+    input_shape: [3, 1024, 256]
+    conv_channels: [8, 16, 32, 16, 8, 4]
+    conv_kernel_size: [2, 2, 2, 2, 2, 2]
+    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+    conv_dropout: 0.0, 0.0, 0.2, 0.2, 0.0, 0.0
+    linear_features: [64, 5]
+    linear_dropout: [0.4]
+    last_layer_activation: Softmax(dim=0)
+
+  family_Aves:
+    input_shape: [3, 1024, 256]
+    conv_channels: [8, 16, 32, 16, 8, 4]
+    conv_kernel_size: [2, 2, 2, 2, 2, 2]
+    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+    conv_dropout: 0.0, 0.0, 0.2, 0.2, 0.0, 0.0
+    linear_features: [64, 5]
+    linear_dropout: [0.4]
+    last_layer_activation: Softmax(dim=0)
+
+  family_Mammalia:
+    input_shape: [3, 1024, 256]
+    conv_channels: [8, 16, 32, 16, 8, 4]
+    conv_kernel_size: [2, 2, 2, 2, 2, 2]
+    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+    conv_dropout: 0.0, 0.0, 0.2, 0.2, 0.0, 0.0
+    linear_features: [64, 5]
+    linear_dropout: [0.4]
+    last_layer_activation: Softmax(dim=0)
+
+  family_Reptilia:
+    input_shape: [3, 1024, 256]
+    conv_channels: [8, 16, 32, 16, 8, 4]
+    conv_kernel_size: [2, 2, 2, 2, 2, 2]
+    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+    conv_dropout: 0.0, 0.0, 0.2, 0.2, 0.0, 0.0
+    linear_features: [64, 5]
+    linear_dropout: [0.4]
+    last_layer_activation: Softmax(dim=0)

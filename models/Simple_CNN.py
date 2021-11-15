@@ -13,6 +13,7 @@ import torchvision
 import torchvision.transforms as transforms
 
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from sklearn.metrics import accuracy_score
 
@@ -21,41 +22,64 @@ import utils
 
 class SimpleCNN(nn.Module):
     # Init
-    def __init__(self, input_channels: int, input_shape: tuple,
-                 num_labels: int, net_arch: dict):
+    def __init__(self, net_arch: dict):
 
         super(SimpleCNN, self).__init__()
         # Fields
-        self.input_channels = input_channels
-        self.height, self.width = input_shape
-        self.num_labels = num_labels
+        input_channels, height, width = net_arch["input_shape"]
+
+        # Check format so for loops do not do it wrong with 'zip'
+        assert len(net_arch["conv_channels"]) == len(net_arch["conv_kernel_size"]),\
+        f"Lenght of convolutional channels ({len(net_arch['conv_channels'])})"\
+        + f" must be the same as the lenght of convolutional kernel size"\
+        f" ({len(net_arch['conv_kernel_size'])})."
+
+        assert len(net_arch["conv_channels"]) == len(net_arch["conv_dropout"]),\
+        f"Lenght of convolutional channels ({len(net_arch['conv_channels'])})"\
+        f" must be the same as the lenght of pooling size"\
+        f" ({len(net_arch['conv_dropout'])})."
+
+        assert len(net_arch["conv_channels"]) == len(net_arch["pooling_size"]),\
+        f"Lenght of convolutional channels ({len(net_arch['conv_channels'])})"\
+        f" must be the same as the lenght of convolutional dropout"\
+        f" ({len(net_arch['pooling_size'])})."
+
+        assert len(net_arch["linear_features"]) == 1 + len(net_arch["linear_dropout"]),\
+        f"Lenght of linear features ({len(net_arch['linear_features'])})"\
+        f" must be one more than the the lenght of linear dropout"\
+        f" ({len(net_arch['linear_dropout'])})."
+
 
         # Layers - Conv
         self.conv = nn.ModuleList()
+        self.bnorm = nn.ModuleList() # Batch Normalization
+        self.cdrop = nn.ModuleList() # Dropout
+        self.pool = nn.ModuleList()
 
-        for channels, kernel_size in zip(net_arch["conv_channels"],
-                                        net_arch["conv_kernel_size"]):
+        for channels, kernel_size, drop, pool in zip(net_arch["conv_channels"],
+                                                     net_arch["conv_kernel_size"],
+                                                     net_arch["conv_dropout"],
+                                                     net_arch["pooling_size"]):
+
             layer = nn.Conv2d(in_channels=input_channels, out_channels=channels,
                               kernel_size=kernel_size, padding="same")
             self.conv.append(layer)
+            self.bnorm.append(nn.BatchNorm2d(channels))
+            self.cdrop.append(nn.Dropout(drop))
+            self.pool.append(nn.MaxPool2d(pool))
 
             # Update parameters
             input_channels = channels
-
-        # Pooling
-        self.pool = nn.ModuleList()
-
-        for pool_size in net_arch["pooling_size"]:
-            self.pool.append(nn.MaxPool2d(pool_size))
-
-            # Update parameters
-            self.height = int(self.height / pool_size[0])
-            self.width = int(self.width / pool_size[1])
+            height = int(height / pool[0])
+            width = int(width / pool[1])
 
         # Layers - Linear
         self.dense = nn.ModuleList()
+        self.ldrop = nn.ModuleList()
 
-        input_channels = input_channels * self.height * self.width
+        # Flatten
+        input_channels = input_channels * height * width
+
 
         for linear_features in net_arch["linear_features"]:
             layer = nn.Linear(input_channels, linear_features)
@@ -64,8 +88,8 @@ class SimpleCNN(nn.Module):
             # Update parameters
             input_channels = linear_features
 
-        self.dense.append(nn.Linear(input_channels, num_labels))
-
+        for drop in net_arch["linear_dropout"]:
+            self.ldrop.append(nn.Dropout(drop))
 
         # Activation
         self.relu = nn.ReLU()
@@ -76,13 +100,20 @@ class SimpleCNN(nn.Module):
 
     def forward(self, x):
 
-        for conv, pool in zip(self.conv, self.pool):
-            x = self.relu(pool(conv(x)))
+        for conv, pool, batch_norm, dropout in zip(self.conv, self.pool,
+                                                   self.bnorm, self.cdrop):
+            x = conv(x)
+            x = batch_norm(x)
+            x = pool(x)
+            x = self.relu(x)
+            x = dropout(x)
 
         x = self.flatten(x)
 
-        for dense in self.dense[:-1]:
-            x = self.relu(dense(x))
+        for dense, dropout in zip(self.dense, self.ldrop):
+            x = dense(x)
+            x = self.relu(x)
+            x = dropout(x)
 
         x = self.last_activation(self.dense[-1](x))
 
@@ -92,7 +123,15 @@ class SimpleCNN(nn.Module):
                    validation_loader: DataLoader,
                    criterion, optimizer,
                    show: bool = True, frequency_val : int = 2,
-                   log_file: str = None, plot_file: str = None):
+                   log_file: str = None, plot_file: str = None,
+                   train_name: str = "Network"):
+
+        sns.set()
+
+        if log_file:
+            with open(log_file, "a") as f:
+                f.write(train_name + "\n")
+
         train_loss = []
         train_acc = []
         plot_epochs_train = []
@@ -179,27 +218,26 @@ class SimpleCNN(nn.Module):
                         f.write(f"\t Validation Loss: {val_loss[-1]:.2f}\n")
                         f.write(f"\t Validation Accuracy: {val_acc[-1]:.2f}\n")
 
+        step = int(len(plot_epochs_train) // 10)
 
         loss_ax.set_title("Loss function value in the train and validation sets")
         loss_ax.plot(plot_epochs_train, train_loss, label="Train Loss")
         loss_ax.plot(plot_epochs_val, val_loss, label="Validation Loss")
         loss_ax.set_xlabel("Epochs")
         loss_ax.set_ylabel("Value")
-        loss_ax.set_xticks(plot_epochs_train)
         loss_ax.legend()
+        loss_ax.set_xticks(range(1, len(plot_epochs_train), step))
 
         acc_ax.set_title("Accuracy of the train and validation sets")
         acc_ax.plot(plot_epochs_train, train_acc, label="Train Accuracy")
         acc_ax.plot(plot_epochs_val, val_acc, label="Validation Accuracy")
         acc_ax.set_xlabel("Epochs")
         acc_ax.set_ylabel("Percentage")
-
-
-        # Not tested yet
-        step = int(len(plot_epochs_train) // 10)
-
         acc_ax.set_xticks(range(1, len(plot_epochs_train), step))
         acc_ax.legend()
+
+
+
 
         if plot_file:
             plt.savefig(plot_file)
