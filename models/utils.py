@@ -90,11 +90,16 @@ class SpectrogramDataset(Dataset):
         fig, axarr = plt.subplots(num_rows, samples_per_row, figsize=figsize)
 
         for idx, ax in zip(sample_idx, axarr.flatten()):
-            image = self.get_image(idx)
-            label = self.get_label(idx)
+            image, _ = self[idx].values()
+
+            # Permuting to put channels at the end 
+            image = image.squeeze().permute(1,2,0)
+            
+            # Normalizing between 0 and 1
+            image = NormalizeData(image.numpy())
             ax.imshow(image)
             ax.axis("off")
-            ax.set_title(label)
+            ax.set_title(self.get_label(idx))
 
         plt.axis("off")
 
@@ -106,6 +111,11 @@ class SpectrogramDataset(Dataset):
             plt.close()
 
 
+### NUMPY FUNCTIONS ###
+
+# Normalizes data between 0 and 1
+def NormalizeData(data):
+    return (data - np.min(data)) / (np.max(data) - np.min(data))
 
 ### CUDA FUNCTIONS ###
 
