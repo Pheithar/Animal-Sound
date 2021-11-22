@@ -19,6 +19,9 @@ from sklearn.metrics import accuracy_score
 
 import utils
 
+import warnings
+warnings.filterwarnings("ignore")
+
 
 class SimpleCNN(nn.Module):
     # Init
@@ -36,7 +39,7 @@ class SimpleCNN(nn.Module):
 
         assert len(net_arch["conv_channels"]) == len(net_arch["conv_dropout"]),\
         f"Lenght of convolutional channels ({len(net_arch['conv_channels'])})"\
-        f" must be the same as the lenght of pooling size"\
+        f" must be the same as the lenght of convolutional dropout"\
         f" ({len(net_arch['conv_dropout'])})."
 
         assert len(net_arch["conv_channels"]) == len(net_arch["pooling_size"]),\
@@ -123,9 +126,15 @@ class SimpleCNN(nn.Module):
                    validation_loader: DataLoader,
                    criterion, optimizer,
                    show: bool = True, frequency_val : int = 2,
-                   log_file: str = None, plot_file: str = None):
+                   log_file: str = None, plot_file: str = None,
+                   train_name: str = "Network"):
 
         sns.set()
+
+        if log_file:
+            with open(log_file, "a") as f:
+                f.write("-------------------------------------------\n")
+                f.write(train_name + "\n")
 
         train_loss = []
         train_acc = []
@@ -137,7 +146,7 @@ class SimpleCNN(nn.Module):
 
         fig, (loss_ax, acc_ax) = plt.subplots(2, 1, figsize=(12, 10))
 
-        for epoch in tqdm(range(num_epochs)):
+        for epoch in tqdm(range(num_epochs), desc=f"Training {train_name}"):
 
             running_loss = 0.0
             running_accuracy = 0.0
@@ -157,7 +166,7 @@ class SimpleCNN(nn.Module):
                 # Forward, backward and around
                 outputs = self(inputs)
 
-                # print(outputs.shape, labels.shape)
+                # print(f"out: {outputs.shape}, lab: {labels.shape}")
 
                 loss = criterion(outputs, labels)
                 loss.backward()
@@ -213,27 +222,26 @@ class SimpleCNN(nn.Module):
                         f.write(f"\t Validation Loss: {val_loss[-1]:.2f}\n")
                         f.write(f"\t Validation Accuracy: {val_acc[-1]:.2f}\n")
 
+        step = max(int(len(plot_epochs_train) // 10), 1)
 
         loss_ax.set_title("Loss function value in the train and validation sets")
         loss_ax.plot(plot_epochs_train, train_loss, label="Train Loss")
         loss_ax.plot(plot_epochs_val, val_loss, label="Validation Loss")
         loss_ax.set_xlabel("Epochs")
         loss_ax.set_ylabel("Value")
-        loss_ax.set_xticks(plot_epochs_train)
         loss_ax.legend()
+        loss_ax.set_xticks(range(1, len(plot_epochs_train), step))
 
         acc_ax.set_title("Accuracy of the train and validation sets")
         acc_ax.plot(plot_epochs_train, train_acc, label="Train Accuracy")
         acc_ax.plot(plot_epochs_val, val_acc, label="Validation Accuracy")
         acc_ax.set_xlabel("Epochs")
         acc_ax.set_ylabel("Percentage")
-
-
-        # Not tested yet
-        step = int(len(plot_epochs_train) // 10)
-
         acc_ax.set_xticks(range(1, len(plot_epochs_train), step))
         acc_ax.legend()
+
+
+
 
         if plot_file:
             plt.savefig(plot_file)
@@ -247,7 +255,7 @@ class SimpleCNN(nn.Module):
 
 
     def compute_prediction(self, y):
-        if y.shape[1] == 1:
-            return y.int()
+        # if y.shape[1] == 1:
+        #     return y.int()
 
         return torch.max(y, 1)[1]
