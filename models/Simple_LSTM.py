@@ -22,30 +22,61 @@ import utils
 
 class SimpleLSTM(nn.Module):
     # Init
-    def __init__(self, input_size, hidden_size, num_layers, num_classes):
+    def __init__(self, net_arch: dict):
 
-        super(RNN, self).__init__()
+        super(SimpleLSTM, self).__init__()
 
-        self.hidden_size = hidden_size
-        self.num_layers = num_layers
-        self.lstm = nn.LSTM(input_size, self.hidden_size, self.num_layers, batch_first=True, dropout=0.2)
-        self.fc1 = nn.Linear(hidden_size, int(hidden_size/2))
+        input_size = net_arch["input_size"]
+        hidden_size = net_arch["hidden_size"]
+        num_layers = net_arch["num_layers"]
+        lstm_dropout = net_arch["lstm_dropout"]
+
+        assert len(net_arch["linear_features"]) == 1 + len(net_arch["linear_dropout"]),\
+        f"Lenght of linear features ({len(net_arch['linear_features'])})"\
+        f" must be one more than the the lenght of linear dropout"\
+        f" ({len(net_arch['linear_dropout'])})."
+
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True,
+                            dropout=lstm_dropout)
+
+        # Layers - Linear
+        self.dense = nn.ModuleList()
+        self.ldrop = nn.ModuleList()
+
+        # Flatten
+        input_channels = hidden_size
+
+        for linear_features in net_arch["linear_features"]:
+            layer = nn.Linear(input_channels, linear_features)
+            self.dense.append(layer)
+
+            # Update parameters
+            input_channels = linear_features
+
+        for drop in net_arch["linear_dropout"]:
+            self.ldrop.append(nn.Dropout(drop))
+
+        # Activation
         self.relu = nn.ReLU()
-        self.fc2 = nn.Linear(int(hidden_size/2), int(hidden_size/2))
-        self.fc3 = nn.Linear(int(hidden_size/2), num_classes)
+        self.last_activation = eval("nn." + net_arch["last_layer_activation"])
+
+
+
 
 
     def forward(self, x):
+        x, _ = self.lstm(x)
 
-        x = x.float()
-        h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).float()
-        c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).float()
-        out, _ = self.lstm(x, (h0,c0))
-        out = self.relu(self.fc1(out[:, -1, :]))
-        out = self.relu(self.fc2(out))
-        out = self.fc3(out)
+        x = x[:, -1]
 
-        return out
+        for dense, dropout in zip(self.dense, self.ldrop):
+            x = dense(x)
+            x = self.relu(x)
+            x = dropout(x)
+
+        x = self.last_activation(self.dense[-1](x))
+
+        return x
 
 
     def fit(self, num_epochs: int, train_loader: DataLoader,
@@ -147,7 +178,7 @@ class SimpleLSTM(nn.Module):
                         f.write(f"\t Validation Loss: {val_loss[-1]:.2f}\n")
                         f.write(f"\t Validation Accuracy: {val_acc[-1]:.2f}\n")
 
-        step = int(len(plot_epochs_train) // 10)
+        step = max(int(len(plot_epochs_train) // 10), 1)
 
         loss_ax.set_title("Loss function value in the train and validation sets")
         loss_ax.plot(plot_epochs_train, train_loss, label="Train Loss")

@@ -1,0 +1,20 @@
+SimpleLSTM1out_noDrop
+SimpleLSTM1out_noDrop
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.72
+	 Train Accuracy: 0.50
+	 Validation Loss: 0.70
+	 Validation Accuracy: 0.53
+-------------------------------------------
+Epoch 3:
+	 Train Loss: 0.65
+	 Train Accuracy: 0.63
+	 Validation Loss: 0.71
+	 Validation Accuracy: 0.50
+-------------------------------------------
+Epoch 5:
+	 Train Loss: 0.58
+	 Train Accuracy: 0.72
+	 Validation Loss: 0.74
+	 Validation Accuracy: 0.48

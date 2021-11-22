@@ -1,0 +1,65 @@
+SimpleLSTM
+SimpleLSTM
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.71
+	 Train Accuracy: 0.51
+	 Validation Loss: 0.72
+	 Validation Accuracy: 0.50
+SimpleLSTM
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.70
+	 Train Accuracy: 0.51
+	 Validation Loss: 0.69
+	 Validation Accuracy: 0.57
+-------------------------------------------
+Epoch 3:
+	 Train Loss: 0.64
+	 Train Accuracy: 0.66
+	 Validation Loss: 0.70
+	 Validation Accuracy: 0.53
+-------------------------------------------
+Epoch 5:
+	 Train Loss: 0.58
+	 Train Accuracy: 0.73
+	 Validation Loss: 0.70
+	 Validation Accuracy: 0.58
+SimpleLSTM
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.55
+	 Train Accuracy: 0.75
+	 Validation Loss: 0.71
+	 Validation Accuracy: 0.56
+-------------------------------------------
+Epoch 3:
+	 Train Loss: 0.50
+	 Train Accuracy: 0.78
+	 Validation Loss: 0.72
+	 Validation Accuracy: 0.56
+-------------------------------------------
+Epoch 5:
+	 Train Loss: 0.45
+	 Train Accuracy: 0.82
+	 Validation Loss: 0.76
+	 Validation Accuracy: 0.56
+SimpleLSTM
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.72
+	 Train Accuracy: 0.50
+	 Validation Loss: 0.70
+	 Validation Accuracy: 0.54
+-------------------------------------------
+Epoch 3:
+	 Train Loss: 0.66
+	 Train Accuracy: 0.61
+	 Validation Loss: 0.69
+	 Validation Accuracy: 0.55
+-------------------------------------------
+Epoch 5:
+	 Train Loss: 0.60
+	 Train Accuracy: 0.71
+	 Validation Loss: 0.71
+	 Validation Accuracy: 0.54
