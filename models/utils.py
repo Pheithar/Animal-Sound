@@ -6,11 +6,15 @@ import pandas as pd
 import torch
 import torchvision
 from torch.utils.data import Dataset
+import torch.nn.functional as F
+
 from skimage import io, transform
 
 from sklearn.preprocessing import MultiLabelBinarizer
 
 import matplotlib.pyplot as plt
+
+import h5py
 
 
 ### SPECTROGRAM DATASET CLASS ###
@@ -109,6 +113,71 @@ class SpectrogramDataset(Dataset):
             plt.show()
         else:
             plt.close()
+
+
+### MFCC DATASET CLASS ###
+class MFCCDataset(Dataset):
+    """
+    Args:
+        csv_path: path to csv file
+        root_dir: dir of h5 file
+        id_column: column of the id
+        label_column: column of the label
+        transform: transformations of the image
+        one_hot_encode_labels: whether or not to use one hot encoding
+    """
+    def __init__(self, csv_path: str, root_dir: str, id_column: str, label_column: str, transform=None, one_hot_encode_labels: bool = False):
+        self.csv = pd.read_csv(csv_path)
+        self.col_path_idx = self.csv.columns.get_loc(id_column)
+        self.col_label_idx = self.csv.columns.get_loc(label_column)
+        self.root_dir = root_dir
+        self.max_len = 0
+
+        with h5py.File(root_dir, "r") as f:
+            for key in list(f.keys()):
+                key_shape = np.array(f[key]).shape[1]
+                if key_shape > self.max_len:
+                    self.max_len = key_shape
+
+        self.transform = transform
+
+        self.one_hot_encode_bool = one_hot_encode_labels
+
+        # Giving a class id for each unique class in dataset
+        self.lexicon = {class_name: class_id for class_id, class_name in enumerate(self.csv[label_column].unique())}
+
+        if one_hot_encode_labels:
+            # Assigning label to each row
+            labels = list(map(self.lexicon.get, self.csv[label_column]))
+            self.labels = np.eye(len(self.lexicon), dtype="float")[labels]
+
+    def __len__(self):
+        return len(self.csv)
+
+    def __getitem__(self, idx: int):
+        """Return image and label"""
+
+        key = self.csv.iloc[idx, self.col_path_idx]
+
+        with h5py.File(self.root_dir, "r") as f:
+            mfcc = torch.tensor(f[str(key)])
+            mfcc = F.pad(mfcc, (0, self.max_len-mfcc.shape[1]))
+
+
+        if self.one_hot_encode_bool:
+            label = self.labels[idx]
+        else:
+            label = [self.lexicon[self.csv.iloc[idx, self.col_label_idx]]]
+
+        if self.transform: mfcc = self.transform(mfcc)
+
+        sample = {"mfcc": mfcc, "label": np.float32(label)}
+
+
+        return sample
+
+
+
 
 ### DATASET FIT FOR HIERARCHICAL STRUCTURE ###
 class HierarchicalDataset(Dataset):

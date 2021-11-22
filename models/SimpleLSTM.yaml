@@ -1,0 +1,8 @@
+SimpleLSTM1out_noDrop:
+  input_size: 3467
+  hidden_size: 10
+  num_layers: 1
+  lstm_dropout: 0.0
+  linear_features: [2]
+  linear_dropout: []
+  last_layer_activation: Softmax(dim=1)
