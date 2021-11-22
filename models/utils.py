@@ -127,6 +127,7 @@ class HierarchicalDataset(Dataset):
         self.col_path_idx = self.csv.columns.get_loc(id_column)
         self.transform = transform
         self.hierarchy = hierarchy
+        self.childs_of = []
 
         self.order = []
 
@@ -159,7 +160,8 @@ class HierarchicalDataset(Dataset):
                                  if x!=row[self.hierarchy[i]]
                                  else 1.0
                                  for x in unique_elements])
-
+                if i > 0:
+                    self.childs_of.append({row[self.hierarchy[i-1]]: row[self.hierarchy[i]]})
                 self.labels[row[self.hierarchy[i]]] = label
 
     def set_order(self, order):

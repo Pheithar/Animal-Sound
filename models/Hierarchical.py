@@ -1,6 +1,8 @@
 from Simple_CNN import SimpleCNN
 import utils
 
+import numpy as np
+
 import torch
 from torch.utils.data import DataLoader, random_split
 import torch.nn as nn
@@ -107,7 +109,53 @@ class HierarchicalClassification():
     def calculate_output(self, x):
         value = np.ones(x.shape[0])
         x = utils.get_cuda(x)
-        return self.root.calculate_output(x, self.dataset.labels, value)
+        outputs = self.root.calculate_output(x, self.dataset.labels, value)
+
+        organization = self.organization
+
+        out = []
+
+        flat_out = self.from_values_to_output(outputs, organization)
+        for i, (key, value) in enumerate(flat_out.items()):
+            name = key.split("_")[-1]
+            # print(name)
+            out.append([])
+            for k in self.dataset.childs_of:
+                if k.get(name):
+                    for idx, val in zip(np.argmax(value, 1), np.amax(value, 1)):
+                        if np.argmax(self.dataset.labels[k.get(name)]) == idx:
+                            # print(k.get(name), val)
+                            out[i].append([k.get(name), val])
+
+        out = np.array(out)
+        for i in range(out.shape[1]):
+            idx = np.argmax(out[:, i, 1])
+            print(f"Label: {out[idx, 0, 0]} with probability {float(out[idx, 0, 1])*100:.3f}%")
+
+
+
+
+        # print(outputs["phylum"]["class_Arthropoda"]["family_Arachnida"])
+
+
+    def from_values_to_output(self, outputs, organization, flat_out={}):
+        if isinstance(organization, dict):
+            for key, value in organization.items():
+                # print(key)
+                flat_out = self.from_values_to_output(outputs[key], organization[key], flat_out)
+            return flat_out
+
+        for i in organization:
+            # print(i)
+            # print(outputs[i]["value"])
+            flat_out[i] = outputs[i]["value"]
+
+        return flat_out
+
+
+
+
+        # print(outputs["phylum"]["class_Arthropoda"])
 
 
 
