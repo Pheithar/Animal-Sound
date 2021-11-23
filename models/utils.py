@@ -53,6 +53,8 @@ class SpectrogramDataset(Dataset):
     def __getitem__(self, idx: int):
         """Return image and label"""
 
+        # print(self.csv.iloc[idx, self.col_path_idx])
+
         img_name = os.path.join(self.root_dir,
             str(self.csv.iloc[idx, self.col_path_idx]) + ".jpg")
         image = io.imread(img_name)

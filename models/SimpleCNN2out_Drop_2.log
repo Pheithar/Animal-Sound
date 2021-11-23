@@ -268,3 +268,5 @@ Epoch 100:
 	 Train Accuracy: 0.91
 	 Validation Loss: 1.23
 	 Validation Accuracy: 0.84
+-------------------------------------------
+SimpleCNN2out_Drop_2
