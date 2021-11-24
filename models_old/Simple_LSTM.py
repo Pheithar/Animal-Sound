@@ -17,7 +17,7 @@ import seaborn as sns
 
 from sklearn.metrics import accuracy_score
 
-from . import utils
+import utils
 
 
 class SimpleLSTM(nn.Module):

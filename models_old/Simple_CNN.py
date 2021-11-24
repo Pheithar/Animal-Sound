@@ -17,34 +17,72 @@ import seaborn as sns
 
 from sklearn.metrics import accuracy_score
 
-from . import utils
+import utils
+
+import warnings
+warnings.filterwarnings("ignore")
 
 
-class SimpleLSTM(nn.Module):
+class SimpleCNN(nn.Module):
     # Init
     def __init__(self, net_arch: dict):
 
-        super(SimpleLSTM, self).__init__()
+        super(SimpleCNN, self).__init__()
+        # Fields
+        input_channels, height, width = net_arch["input_shape"]
 
-        input_size = net_arch["input_size"]
-        hidden_size = net_arch["hidden_size"]
-        num_layers = net_arch["num_layers"]
-        lstm_dropout = net_arch["lstm_dropout"]
+        # Check format so for loops do not do it wrong with 'zip'
+        assert len(net_arch["conv_channels"]) == len(net_arch["conv_kernel_size"]),\
+        f"Lenght of convolutional channels ({len(net_arch['conv_channels'])})"\
+        + f" must be the same as the lenght of convolutional kernel size"\
+        f" ({len(net_arch['conv_kernel_size'])})."
+
+        assert len(net_arch["conv_channels"]) == len(net_arch["conv_dropout"]),\
+        f"Lenght of convolutional channels ({len(net_arch['conv_channels'])})"\
+        f" must be the same as the lenght of convolutional dropout"\
+        f" ({len(net_arch['conv_dropout'])})."
+
+        assert len(net_arch["conv_channels"]) == len(net_arch["pooling_size"]),\
+        f"Lenght of convolutional channels ({len(net_arch['conv_channels'])})"\
+        f" must be the same as the lenght of convolutional dropout"\
+        f" ({len(net_arch['pooling_size'])})."
 
         assert len(net_arch["linear_features"]) == 1 + len(net_arch["linear_dropout"]),\
         f"Lenght of linear features ({len(net_arch['linear_features'])})"\
         f" must be one more than the the lenght of linear dropout"\
         f" ({len(net_arch['linear_dropout'])})."
 
-        self.lstm = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True,
-                            dropout=lstm_dropout)
+
+        # Layers - Conv
+        self.conv = nn.ModuleList()
+        self.bnorm = nn.ModuleList() # Batch Normalization
+        self.cdrop = nn.ModuleList() # Dropout
+        self.pool = nn.ModuleList()
+
+        for channels, kernel_size, drop, pool in zip(net_arch["conv_channels"],
+                                                     net_arch["conv_kernel_size"],
+                                                     net_arch["conv_dropout"],
+                                                     net_arch["pooling_size"]):
+
+            layer = nn.Conv2d(in_channels=input_channels, out_channels=channels,
+                              kernel_size=kernel_size, padding="same")
+            self.conv.append(layer)
+            self.bnorm.append(nn.BatchNorm2d(channels))
+            self.cdrop.append(nn.Dropout(drop))
+            self.pool.append(nn.MaxPool2d(pool))
+
+            # Update parameters
+            input_channels = channels
+            height = int(height / pool[0])
+            width = int(width / pool[1])
 
         # Layers - Linear
         self.dense = nn.ModuleList()
         self.ldrop = nn.ModuleList()
 
         # Flatten
-        input_channels = hidden_size
+        input_channels = input_channels * height * width
+
 
         for linear_features in net_arch["linear_features"]:
             layer = nn.Linear(input_channels, linear_features)
@@ -60,14 +98,20 @@ class SimpleLSTM(nn.Module):
         self.relu = nn.ReLU()
         self.last_activation = eval("nn." + net_arch["last_layer_activation"])
 
-
-
-
+        # Flatten
+        self.flatten = nn.Flatten()
 
     def forward(self, x):
-        x, _ = self.lstm(x)
 
-        x = x[:, -1]
+        for conv, pool, batch_norm, dropout in zip(self.conv, self.pool,
+                                                   self.bnorm, self.cdrop):
+            x = conv(x)
+            x = batch_norm(x)
+            x = pool(x)
+            x = self.relu(x)
+            x = dropout(x)
+
+        x = self.flatten(x)
 
         for dense, dropout in zip(self.dense, self.ldrop):
             x = dense(x)
@@ -77,7 +121,6 @@ class SimpleLSTM(nn.Module):
         x = self.last_activation(self.dense[-1](x))
 
         return x
-
 
     def fit(self, num_epochs: int, train_loader: DataLoader,
                    validation_loader: DataLoader,
@@ -90,6 +133,7 @@ class SimpleLSTM(nn.Module):
 
         if log_file:
             with open(log_file, "a") as f:
+                f.write("-------------------------------------------\n")
                 f.write(train_name + "\n")
 
         train_loss = []
@@ -102,7 +146,7 @@ class SimpleLSTM(nn.Module):
 
         fig, (loss_ax, acc_ax) = plt.subplots(2, 1, figsize=(12, 10))
 
-        for epoch in tqdm(range(num_epochs)):
+        for epoch in tqdm(range(num_epochs), desc=f"Training {train_name}"):
 
             running_loss = 0.0
             running_accuracy = 0.0
@@ -122,7 +166,7 @@ class SimpleLSTM(nn.Module):
                 # Forward, backward and around
                 outputs = self(inputs)
 
-                # print(outputs.shape, labels.shape)
+                # print(f"out: {outputs.shape}, lab: {labels.shape}")
 
                 loss = criterion(outputs, labels)
                 loss.backward()
@@ -211,7 +255,7 @@ class SimpleLSTM(nn.Module):
 
 
     def compute_prediction(self, y):
-        if y.shape[1] == 1:
-            return y.int()
+        # if y.shape[1] == 1:
+        #     return y.int()
 
         return torch.max(y, 1)[1]

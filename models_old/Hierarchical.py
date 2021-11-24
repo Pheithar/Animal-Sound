@@ -1,5 +1,5 @@
 from .Simple_CNN import SimpleCNN
-import .utils
+import utils
 
 import numpy as np
 

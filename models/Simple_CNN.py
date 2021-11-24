@@ -17,7 +17,7 @@ import seaborn as sns
 
 from sklearn.metrics import accuracy_score
 
-import utils
+from . import utils
 
 import warnings
 warnings.filterwarnings("ignore")

@@ -1,10 +1,6 @@
 -------------------------------------------
 FlattenCNN
 -------------------------------------------
-FlattenCNN
--------------------------------------------
-FlattenCNN
--------------------------------------------
 Epoch 1:
 	 Train Loss: 0.02
 	 Train Accuracy: 0.08
@@ -13,34 +9,6 @@ Epoch 1:
 -------------------------------------------
 Epoch 3:
 	 Train Loss: 0.02
-	 Train Accuracy: 0.11
-	 Validation Loss: 0.02
-	 Validation Accuracy: 0.14
--------------------------------------------
-Epoch 5:
-	 Train Loss: 0.02
-	 Train Accuracy: 0.13
-	 Validation Loss: 0.02
-	 Validation Accuracy: 0.16
--------------------------------------------
-FlattenCNN
--------------------------------------------
-FlattenCNN
--------------------------------------------
-FlattenCNN
--------------------------------------------
-FlattenCNN
--------------------------------------------
-FlattenCNN
--------------------------------------------
-Epoch 1:
-	 Train Loss: 0.02
-	 Train Accuracy: 0.09
-	 Validation Loss: 0.02
-	 Validation Accuracy: 0.09
--------------------------------------------
-Epoch 3:
-	 Train Loss: 0.02
 	 Train Accuracy: 0.09
 	 Validation Loss: 0.02
 	 Validation Accuracy: 0.09
@@ -51,21 +19,37 @@ Epoch 5:
 	 Validation Loss: 0.02
 	 Validation Accuracy: 0.09
 -------------------------------------------
-FlattenCNN
--------------------------------------------
-Epoch 1:
+Epoch 7:
 	 Train Loss: 0.02
 	 Train Accuracy: 0.09
 	 Validation Loss: 0.02
 	 Validation Accuracy: 0.09
 -------------------------------------------
-Epoch 3:
+Epoch 9:
 	 Train Loss: 0.02
 	 Train Accuracy: 0.09
 	 Validation Loss: 0.02
 	 Validation Accuracy: 0.09
 -------------------------------------------
-Epoch 5:
+Epoch 11:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.09
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.09
+-------------------------------------------
+Epoch 13:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.09
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.09
+-------------------------------------------
+Epoch 15:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.09
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.09
+-------------------------------------------
+Epoch 17:
 	 Train Loss: 0.02
 	 Train Accuracy: 0.09
 	 Validation Loss: 0.02
