@@ -1,0 +1,95 @@
+FlattenCNN:
+  lr: 0.001
+  epochs: 100
+  input_shape: [3, 1024, 256]
+  conv_channels: [16, 32, 64, 128, 256, 512]
+  conv_kernel_size: [2, 2, 2, 2, 2, 2]
+  pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+  conv_dropout: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+  linear_features: [128, 256, 232]
+  linear_dropout: [0.4, 0.4]
+  last_layer_activation: Softmax(dim=1)
+
+FlattenCNN-1:
+  lr: 0.0001
+  epochs: 100
+  input_shape: [3, 1024, 256]
+  conv_channels: [16, 32, 64, 128, 256, 512]
+  conv_kernel_size: [2, 2, 2, 2, 2, 2]
+  pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+  conv_dropout: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+  linear_features: [128, 256, 232]
+  linear_dropout: [0.4, 0.4]
+  last_layer_activation: Softmax(dim=1)
+
+FlattenCNN-2:
+  lr: 0.001
+  epochs: 100
+  input_shape: [3, 1024, 256]
+  conv_channels: [16, 32, 64, 128, 256, 512]
+  conv_kernel_size: [2, 2, 2, 2, 2, 2]
+  pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+  conv_dropout: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  linear_features: [128, 256, 232]
+  linear_dropout: [0.2, 0.2]
+  last_layer_activation: Softmax(dim=1)
+
+FlattenCNN-3:
+  lr: 0.001
+  epochs: 100
+  input_shape: [3, 1024, 256]
+  conv_channels: [16, 32, 64, 128, 256, 512]
+  conv_kernel_size: [2, 2, 2, 2, 2, 2]
+  pooling_size: [[2, 2], [2, 1], [2, 1], [2, 1], [2, 1], [2, 1]]
+  conv_dropout: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+  linear_features: [1024, 512, 256, 232]
+  linear_dropout: [0.4, 0.4, 0.4]
+  last_layer_activation: Softmax(dim=1)
+
+FlattenCNN-1-1:
+  lr: 0.0005
+  epochs: 100
+  input_shape: [3, 1024, 256]
+  conv_channels: [16, 32, 64, 128, 256, 512]
+  conv_kernel_size: [2, 2, 2, 2, 2, 2]
+  pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+  conv_dropout: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+  linear_features: [128, 256, 232]
+  linear_dropout: [0.4, 0.4]
+  last_layer_activation: Softmax(dim=1)
+
+FlattenCNN-1-2:
+  lr: 0.0005
+  epochs: 100
+  input_shape: [3, 1024, 256]
+  conv_channels: [32, 64, 128, 256, 512, 1024]
+  conv_kernel_size: [2, 2, 2, 2, 2, 2]
+  pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+  conv_dropout: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+  linear_features: [128, 256, 232]
+  linear_dropout: [0.4, 0.4]
+  last_layer_activation: Softmax(dim=1)
+
+FlattenCNN-2-1:
+  lr: 0.001
+  epochs: 100
+  input_shape: [3, 1024, 256]
+  conv_channels: [16, 32, 64, 128, 256, 512]
+  conv_kernel_size: [2, 2, 2, 2, 2, 2]
+  pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+  conv_dropout: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  linear_features: [128, 256, 232]
+  linear_dropout: [0.5, 0.5]
+  last_layer_activation: Softmax(dim=1)
+
+FlattenCNN-2-2:
+  lr: 0.001
+  epochs: 100
+  input_shape: [3, 1024, 256]
+  conv_channels: [16, 32, 64, 128, 256, 512]
+  conv_kernel_size: [2, 2, 2, 2, 2, 2]
+  pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+  conv_dropout: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+  linear_features: [128, 256, 232]
+  linear_dropout: [0.2, 0.2]
+  last_layer_activation: Softmax(dim=1)

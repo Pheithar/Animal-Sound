@@ -125,23 +125,20 @@ class MFCCDataset(Dataset):
         root_dir: dir of h5 file
         id_column: column of the id
         label_column: column of the label
-        transform: transformations of the image
         one_hot_encode_labels: whether or not to use one hot encoding
     """
-    def __init__(self, csv_path: str, root_dir: str, id_column: str, label_column: str, transform=None, one_hot_encode_labels: bool = False):
+    def __init__(self, csv_path: str, root_dir: str, id_column: str, label_column: str, one_hot_encode_labels: bool = False):
         self.csv = pd.read_csv(csv_path)
         self.col_path_idx = self.csv.columns.get_loc(id_column)
         self.col_label_idx = self.csv.columns.get_loc(label_column)
         self.root_dir = root_dir
         self.max_len = 0
 
-        with h5py.File(root_dir, "r") as f:
-            for key in list(f.keys()):
-                key_shape = np.array(f[key]).shape[1]
-                if key_shape > self.max_len:
-                    self.max_len = key_shape
-
-        self.transform = transform
+        for i, row in self.csv.iterrows():
+            path = os.path.join(self.root_dir, str(row[id_column]) + ".npz")
+            row_shape = np.load(path)["data"].shape[1]
+            if row_shape > self.max_len:
+                self.max_len = row_shape
 
         self.one_hot_encode_bool = one_hot_encode_labels
 
@@ -161,24 +158,21 @@ class MFCCDataset(Dataset):
 
         key = self.csv.iloc[idx, self.col_path_idx]
 
-        with h5py.File(self.root_dir, "r") as f:
-            mfcc = torch.tensor(f[str(key)])
-            mfcc = F.pad(mfcc, (0, self.max_len-mfcc.shape[1]))
+        path = os.path.join(self.root_dir, str(key) + ".npz")
+        mfcc = np.load(path)["data"]
 
+        mfcc = torch.tensor(mfcc)
+
+        mfcc = F.pad(mfcc, (0, self.max_len-mfcc.shape[1]))
 
         if self.one_hot_encode_bool:
             label = self.labels[idx]
         else:
             label = [self.lexicon[self.csv.iloc[idx, self.col_label_idx]]]
 
-        if self.transform: mfcc = self.transform(mfcc)
-
         sample = {"mfcc": mfcc, "label": np.float32(label)}
 
-
         return sample
-
-
 
 
 ### DATASET FIT FOR HIERARCHICAL STRUCTURE ###
