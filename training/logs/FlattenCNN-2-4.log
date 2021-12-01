@@ -1,0 +1,8 @@
+-------------------------------------------
+FlattenCNN-2-4
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.09
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.17

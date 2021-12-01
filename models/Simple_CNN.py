@@ -153,7 +153,8 @@ class SimpleCNN(nn.Module):
             for i, data in enumerate(train_loader):
 
                 # Get the inputs
-                inputs, labels = data.values()
+                val = data
+                inputs, labels = val["image"], val["label"]
 
                 inputs = utils.get_cuda(inputs)
                 labels = utils.get_cuda(labels)
@@ -192,7 +193,8 @@ class SimpleCNN(nn.Module):
                 for i, data in enumerate(validation_loader):
 
                     # Get the inputs
-                    inputs, labels = data.values()
+                    val = data
+                    inputs, labels = val["image"], val["label"]
 
                     inputs = utils.get_cuda(inputs)
                     labels = utils.get_cuda(labels)

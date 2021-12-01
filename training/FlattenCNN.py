@@ -104,7 +104,7 @@ seconds_epoch = total_time_epoch % 60
 print(f"{net_name} (epochs = {epochs})")
 print("Total training time:")
 print(f"\t{hours:4.0f} hours, {minutes:4.0f} minutes and {seconds:4.2f} seconds")
-print(f"\t{hours_epochs:4.0f} hours, {minutes_epoch:4.0f} minutes and {seconds_epoch:4.2f} seconds per epoch")
+print(f"\t{hours_epoch:4.0f} hours, {minutes_epoch:4.0f} minutes and {seconds_epoch:4.2f} seconds per epoch")
 print()
 print("Train set:")
 print(f"\tLoss: \t\t{train_loss:.2f}")

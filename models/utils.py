@@ -65,7 +65,6 @@ class SpectrogramDataset(Dataset):
     def __getitem__(self, idx: int):
         """Return image and label"""
 
-        # print(self.csv.iloc[idx, self.col_path_idx])
 
         image = None
         if self.preload:
@@ -191,7 +190,6 @@ class MFCCDataset(Dataset):
             mfcc = np.load(path)["data"]
 
         mfcc = torch.tensor(mfcc)
-
         mfcc = F.pad(mfcc, (0, self.max_len-mfcc.shape[1]))
 
         if self.one_hot_encode_bool:
@@ -209,27 +207,59 @@ class HierarchicalDataset(Dataset):
     """
     Args:
         csv_path: path to csv file
-        root_dir: dir of images
+        root_dir_img: dir of images
+        root_dir_np: dir of mfcc
         id_column: column of the id
         hierarchy: order of columns in hierarchy
         transform: transformations of the image
     """
 
-    def __init__(self, csv_path: str, root_dir: str, id_column: str, hierarchy: list, transform = None):
+    def __init__(self, csv_path: str, root_dir_img: str, root_dir_np: str,
+                id_column: str, hierarchy: list, transform = None,
+                preload: bool = False):
         self.csv = pd.read_csv(csv_path)
-        self.root_dir = root_dir
+        self.root_dir_img = root_dir_img
+        self.root_dir_np = root_dir_np
         self.col_path_idx = self.csv.columns.get_loc(id_column)
         self.transform = transform
         self.hierarchy = hierarchy
-        self.childs_of = []
+        self.max_len = 0
+        self.preload = preload
+        self.order_hierarchy = {}
+
+        for i, row in self.csv.iterrows():
+            path = os.path.join(self.root_dir_np, str(row[id_column]) + ".npz")
+            row_shape = np.load(path)["data"].shape[1]
+            if row_shape > self.max_len:
+                self.max_len = row_shape
+
+
+        if preload:
+            tqdm.pandas()
+            print("Loading images into memory")
+            self.csv["data_img"] = self.csv[id_column].progress_apply(lambda x: io.imread(os.path.join(root_dir_img, str(x) + ".jpg")))
+            print("Loading mfcc into memory")
+            self.csv["data_mfcc"] = self.csv[id_column].progress_apply(lambda x: np.load(os.path.join(root_dir_np, str(x) + ".npz"))["data"])
 
         self.order = []
 
         self.build_hierarchy_labels()
 
+        self.flatten_last_level()
 
     def __len__(self):
         return len(self.csv)
+
+    def flatten_last_level(self):
+        last_level = self.hierarchy[-1]
+        self.flatten_labels = {}
+
+        flatten_last_level = self.csv[last_level].drop_duplicates().values
+
+        for i, leaf in enumerate(flatten_last_level):
+            self.flatten_labels[leaf] = np.zeros(flatten_last_level.shape)
+            self.flatten_labels[leaf][i] = 1
+
 
     # Build a dictionary with the labels for each possible value in dataset
     def build_hierarchy_labels(self):
@@ -248,14 +278,20 @@ class HierarchicalDataset(Dataset):
 
                 # Get unique elements and save the label
                 unique_elements = df[self.hierarchy[i]].unique()
+                if i > 0:
+                    key = row[self.hierarchy[i-1]]
+                    if self.order_hierarchy.get(key):
+                        self.order_hierarchy[key] += [row[self.hierarchy[i]]]
+                    else:
+                        self.order_hierarchy[key] = [row[self.hierarchy[i]]]
+
 
                 # Save the labels the level of the row with its value
                 label = np.array([0.0
                                  if x!=row[self.hierarchy[i]]
                                  else 1.0
                                  for x in unique_elements])
-                if i > 0:
-                    self.childs_of.append({row[self.hierarchy[i-1]]: row[self.hierarchy[i]]})
+
                 self.labels[row[self.hierarchy[i]]] = label
 
     def set_order(self, order):
@@ -283,17 +319,41 @@ class HierarchicalDataset(Dataset):
         return np.zeros(len(self.labels[df[to_classify].values[0]]))
 
 
+
     def __getitem__(self, idx: int):
-        img_name = os.path.join(self.root_dir,
-            str(self.csv.iloc[idx, self.col_path_idx]) + ".jpg")
-        image = io.imread(img_name)
+
+        mfcc = None
+        image = None
+        if self.preload:
+            image = self.csv.iloc[idx]["data_img"]
+            mfcc = self.csv.iloc[idx]["data_mfcc"]
+        else:
+            img_name = os.path.join(self.root_dir_img,
+                str(self.csv.iloc[idx, self.col_path_idx]) + ".jpg")
+            image = io.imread(img_name)
+
+            key = self.csv.iloc[idx, self.col_path_idx]
+
+            path = os.path.join(self.root_dir_np, str(key) + ".npz")
+            mfcc = np.load(path)["data"]
+
+        mfcc = torch.tensor(mfcc)
+        mfcc = F.pad(mfcc, (0, self.max_len-mfcc.shape[1]))
 
         if self.transform:
             image = self.transform(image)
 
         label = self.get_label(idx)
 
-        sample = {"image": image, "label": np.float32(label)}
+        last_level = self.csv.iloc[idx][self.hierarchy[-1]]
+        leaf_label = self.flatten_labels[last_level]
+
+        sample = {
+                    "image": image,
+                    "mfcc": mfcc,
+                    "label": np.float32(label),
+                    "leaf_label": leaf_label
+                }
 
         return sample
 

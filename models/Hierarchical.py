@@ -1,5 +1,6 @@
 from .Simple_CNN import SimpleCNN
-import .utils
+from .Simple_LSTM import SimpleLSTM
+from . import utils
 
 import numpy as np
 
@@ -71,12 +72,10 @@ class HierarchicalClassification():
             print()
 
     def forward(self, x):
-        x = utils.get_cuda(x)
+        # x = utils.get_cuda(x)
         outputs = {}
         for node in self.nodes:
-            out = node.net(x)
-            out = utils.get_numpy(out)
-
+            out = node.forward(x)
             outputs[node.name] = out
         return outputs
 
@@ -85,79 +84,42 @@ class HierarchicalClassification():
             self.dataset.set_order(node.order)
             node.fit(self.train_loader, self.test_loader)
 
+        train_acc = 0
+        for x in self.train_loader:
+            train_acc += self.predict(x)/len(self.train_loader)
+
+        test_acc = 0
+        for x in self.train_loader:
+            test_acc += self.predict(x)/len(self.test_loader)
+
+        return train_acc, test_acc
 
 
-    def predict(self, x, verbose = False):
-        x = utils.get_cuda(x)
-        outputs = {}
-        for node in self.nodes:
-            out = node.net(x)
-            y = node.predict(out)
-            y = utils.get_numpy(y)
+    def predict(self, x):
 
-            if verbose:
-                print(node.name)
-                head = ["Label", "Probability"]
-                tab = []
-                for idx, o in zip(y, out):
-                    tab.append([idx, f"{float(o[idx])*100:.2f}%"])
-                print(tabulate(tab, head, tablefmt="github"))
+        acc = 0
+        predictions = self.root.predict(x, self.dataset.labels).values()
+        size = list(predictions)[0]["value"].shape[0]
 
-            outputs[node.name] = y
-        return outputs
+        for i in range(size):
+            max_value = 0
+            label = None
+            order = None
+            for items in predictions:
+                if items["value"][i] > max_value:
+                    max_value = items["value"][i]
+                    label = items["label"][i]
+                    order = items["order"][-1]
 
-    def calculate_output(self, x):
-        value = np.ones(x.shape[0])
-        x = utils.get_cuda(x)
-        outputs = self.root.calculate_output(x, self.dataset.labels, value)
+            predict_class = self.dataset.order_hierarchy[order][label]
+            predict_label = np.argmax(self.dataset.flatten_labels[predict_class])
+            real_label = np.argmax(x["leaf_label"][i])
 
-        organization = self.organization
-
-        out = []
-
-        flat_out = self.from_values_to_output(outputs, organization)
-        for i, (key, value) in enumerate(flat_out.items()):
-            name = key.split("_")[-1]
-            # print(name)
-            out.append([])
-            for k in self.dataset.childs_of:
-                if k.get(name):
-                    for idx, val in zip(np.argmax(value, 1), np.amax(value, 1)):
-                        if np.argmax(self.dataset.labels[k.get(name)]) == idx:
-                            # print(k.get(name), val)
-                            out[i].append([k.get(name), val])
-
-        out = np.array(out)
-        for i in range(out.shape[1]):
-            idx = np.argmax(out[:, i, 1])
-            print(f"Label: {out[idx, 0, 0]} with probability {float(out[idx, 0, 1])*100:.3f}%")
+            if real_label == predict_label:
+                acc += 1/size
 
 
-
-
-        # print(outputs["phylum"]["class_Arthropoda"]["family_Arachnida"])
-
-
-    def from_values_to_output(self, outputs, organization, flat_out={}):
-        if isinstance(organization, dict):
-            for key, value in organization.items():
-                # print(key)
-                flat_out = self.from_values_to_output(outputs[key], organization[key], flat_out)
-            return flat_out
-
-        for i in organization:
-            # print(i)
-            # print(outputs[i]["value"])
-            flat_out[i] = outputs[i]["value"]
-
-        return flat_out
-
-
-
-
-        # print(outputs["phylum"]["class_Arthropoda"])
-
-
+        return acc
 
 class HierarchicalNode():
     """docstring for HierarchicalNode."""
@@ -170,8 +132,26 @@ class HierarchicalNode():
         self.epochs = params["epochs"]
         self.lr = params["lr"]
         self.log_file = params["log_file"]
+        self.img_file = params["img_file"]
+        self.type = params["type"]
 
-        self.net = utils.cuda_network(SimpleCNN(net_arch))
+        if self.type == "CNN":
+            self.net = utils.cuda_network(SimpleCNN(net_arch))
+        if self.type == "LSTM":
+            self.net = utils.cuda_network(SimpleLSTM(net_arch))
+
+    def forward(self, x):
+        if self.type == "CNN":
+            x = x["image"]
+        if self.type == "LSTM":
+            x = x["mfcc"]
+
+        x = utils.get_cuda(x)
+
+        out = self.net(x)
+        return utils.get_numpy(out)
+
+
 
 
     def fit(self, train_loader, test_loader):
@@ -182,12 +162,37 @@ class HierarchicalNode():
 
 
         self.net.fit(self.epochs, train_loader, test_loader,
-                     criterion, optimizer, frequency_val=5,
-                     log_file=self.log_file, train_name=self.name)
+                     criterion, optimizer, frequency_val=10,
+                     log_file=self.log_file, plot_file=self.img_file,
+                     train_name=self.name, show=False)
 
         print("Done")
 
-    def predict(self, y):
+    def predict(self, x, labels, prediction={}, order=[], outputs={}):
+        out = self.forward(x)
+
+        for child in self.childs:
+            child_name = child.name.split("_")[-1]
+            index = np.argmax(labels[child_name])
+            prediction[child_name] = out[:, index]
+
+            child.predict(x, labels, prediction, order+[child_name], outputs)
+
+        if not self.childs:
+            mult = 1
+            for key in order:
+                mult *= prediction[key]
+            value = mult * np.max(out, axis=1)
+            label = np.argmax(out, axis=1)
+
+            outputs["_".join(order)] = {}
+            outputs["_".join(order)]["order"] = order
+            outputs["_".join(order)]["label"] = label
+            outputs["_".join(order)]["value"] = value
+
+        return outputs
+
+    def compute_prediction(self, y):
         return self.net.compute_prediction(y)
 
     def calculate_output(self, x, labels, value, output={}):

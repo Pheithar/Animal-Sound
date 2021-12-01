@@ -1,0 +1,307 @@
+FlattenLSTM-1-3
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.06
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.09
+-------------------------------------------
+Epoch 3:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.08
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.09
+-------------------------------------------
+Epoch 5:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.08
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.08
+-------------------------------------------
+Epoch 7:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.10
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.06
+-------------------------------------------
+Epoch 9:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.13
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.06
+-------------------------------------------
+Epoch 11:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.16
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.05
+-------------------------------------------
+Epoch 13:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.19
+	 Validation Loss: 0.03
+	 Validation Accuracy: 0.09
+-------------------------------------------
+Epoch 15:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.23
+	 Validation Loss: 0.03
+	 Validation Accuracy: 0.08
+-------------------------------------------
+Epoch 17:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.27
+	 Validation Loss: 0.03
+	 Validation Accuracy: 0.08
+-------------------------------------------
+Epoch 19:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.32
+	 Validation Loss: 0.03
+	 Validation Accuracy: 0.07
+-------------------------------------------
+Epoch 21:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.37
+	 Validation Loss: 0.03
+	 Validation Accuracy: 0.07
+-------------------------------------------
+Epoch 23:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.41
+	 Validation Loss: 0.03
+	 Validation Accuracy: 0.08
+-------------------------------------------
+Epoch 25:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.44
+	 Validation Loss: 0.04
+	 Validation Accuracy: 0.08
+-------------------------------------------
+Epoch 27:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.48
+	 Validation Loss: 0.04
+	 Validation Accuracy: 0.08
+-------------------------------------------
+Epoch 29:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.52
+	 Validation Loss: 0.04
+	 Validation Accuracy: 0.07
+-------------------------------------------
+Epoch 31:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.55
+	 Validation Loss: 0.04
+	 Validation Accuracy: 0.09
+-------------------------------------------
+Epoch 33:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.58
+	 Validation Loss: 0.04
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 35:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.62
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 37:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.64
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 39:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.66
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 41:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.68
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 43:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.68
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 45:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.70
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 47:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.71
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 49:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.72
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 51:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.73
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 53:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.74
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 55:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.75
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 57:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.76
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 59:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.76
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.09
+-------------------------------------------
+Epoch 61:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.77
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 63:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.78
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 65:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.78
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 67:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.79
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 69:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.79
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 71:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.80
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 73:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.81
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 75:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.81
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.10
+-------------------------------------------
+Epoch 77:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.82
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 79:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.82
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.12
+-------------------------------------------
+Epoch 81:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.82
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.13
+-------------------------------------------
+Epoch 83:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.83
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.12
+-------------------------------------------
+Epoch 85:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.83
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.12
+-------------------------------------------
+Epoch 87:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.84
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.12
+-------------------------------------------
+Epoch 89:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.84
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 91:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.84
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.12
+-------------------------------------------
+Epoch 93:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.85
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 95:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.85
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.12
+-------------------------------------------
+Epoch 97:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.85
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 99:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.86
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.11
+-------------------------------------------
+Epoch 100:
+	 Train Loss: 0.00
+	 Train Accuracy: 0.86
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.11
