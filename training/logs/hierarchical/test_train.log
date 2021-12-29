@@ -1,0 +1,624 @@
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.08
+	 Train Accuracy: 0.98
+	 Validation Loss: 0.07
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.05
+	 Train Accuracy: 0.82
+	 Validation Loss: 0.04
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Insecta
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.04
+	 Train Accuracy: 0.35
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Chordata
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.20
+	 Train Accuracy: 0.86
+	 Validation Loss: 0.17
+	 Validation Accuracy: 0.87
+-------------------------------------------
+family_Amphibia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.04
+	 Train Accuracy: 0.27
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.03
+-------------------------------------------
+family_Aves
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.11
+	 Train Accuracy: 0.04
+	 Validation Loss: 0.04
+	 Validation Accuracy: 0.07
+-------------------------------------------
+family_Mammalia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.06
+	 Train Accuracy: 0.06
+	 Validation Loss: 0.03
+	 Validation Accuracy: 0.03
+-------------------------------------------
+family_Reptilia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.08
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.07
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.06
+	 Train Accuracy: 0.76
+	 Validation Loss: 0.04
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Insecta
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.04
+	 Train Accuracy: 0.42
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Chordata
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.21
+	 Train Accuracy: 0.86
+	 Validation Loss: 0.16
+	 Validation Accuracy: 0.87
+-------------------------------------------
+family_Amphibia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.03
+	 Train Accuracy: 0.19
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.31
+-------------------------------------------
+family_Aves
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.11
+	 Train Accuracy: 0.04
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.07
+-------------------------------------------
+family_Mammalia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.06
+	 Train Accuracy: 0.07
+	 Validation Loss: 0.08
+	 Validation Accuracy: 0.03
+-------------------------------------------
+family_Reptilia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.08
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.07
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.06
+	 Train Accuracy: 0.85
+	 Validation Loss: 0.04
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Insecta
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.04
+	 Train Accuracy: 0.19
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Chordata
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.22
+	 Train Accuracy: 0.86
+	 Validation Loss: 0.18
+	 Validation Accuracy: 0.87
+-------------------------------------------
+family_Amphibia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.05
+	 Train Accuracy: 0.17
+	 Validation Loss: 0.00
+	 Validation Accuracy: 0.75
+-------------------------------------------
+family_Aves
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.10
+	 Train Accuracy: 0.04
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.08
+-------------------------------------------
+family_Mammalia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.07
+	 Train Accuracy: 0.06
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.03
+-------------------------------------------
+family_Reptilia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.09
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.06
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.06
+	 Train Accuracy: 0.87
+	 Validation Loss: 0.04
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Insecta
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.05
+	 Train Accuracy: 0.25
+	 Validation Loss: 0.03
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Chordata
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.19
+	 Train Accuracy: 0.86
+	 Validation Loss: 0.18
+	 Validation Accuracy: 0.86
+-------------------------------------------
+family_Amphibia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.04
+	 Train Accuracy: 0.25
+	 Validation Loss: 0.00
+	 Validation Accuracy: 0.00
+-------------------------------------------
+family_Aves
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.10
+	 Train Accuracy: 0.04
+	 Validation Loss: 0.04
+	 Validation Accuracy: 0.07
+-------------------------------------------
+family_Mammalia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.07
+	 Train Accuracy: 0.08
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.03
+-------------------------------------------
+family_Reptilia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.05
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.04
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.03
+	 Train Accuracy: 0.96
+	 Validation Loss: 0.02
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Insecta
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.05
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.03
+	 Train Accuracy: 0.98
+	 Validation Loss: 0.02
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Insecta
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.02
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.00
+-------------------------------------------
+class_Chordata
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.05
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.13
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.10
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.09
+	 Train Accuracy: 0.88
+	 Validation Loss: 0.03
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Insecta
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.01
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.00
+-------------------------------------------
+class_Chordata
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.16
+	 Train Accuracy: 0.86
+	 Validation Loss: 0.13
+	 Validation Accuracy: 0.88
+-------------------------------------------
+family_Actinopterygii
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.20
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.11
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.04
+	 Train Accuracy: 0.98
+	 Validation Loss: 0.02
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Insecta
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.01
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.00
+-------------------------------------------
+class_Chordata
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.15
+	 Train Accuracy: 0.86
+	 Validation Loss: 0.12
+	 Validation Accuracy: 0.87
+-------------------------------------------
+family_Actinopterygii
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.03
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Amphibia
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.13
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.08
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.04
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.03
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Insecta
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.01
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.00
+-------------------------------------------
+class_Chordata
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.15
+	 Train Accuracy: 0.86
+	 Validation Loss: 0.13
+	 Validation Accuracy: 0.86
+-------------------------------------------
+family_Actinopterygii
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.04
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Amphibia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.03
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.00
+-------------------------------------------
+family_Aves
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.13
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.10
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.04
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.03
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Insecta
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.02
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.00
+-------------------------------------------
+class_Chordata
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.15
+	 Train Accuracy: 0.86
+	 Validation Loss: 0.13
+	 Validation Accuracy: 0.88
+-------------------------------------------
+family_Actinopterygii
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.03
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Amphibia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.08
+	 Validation Loss: 0.00
+	 Validation Accuracy: 0.00
+-------------------------------------------
+family_Aves
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.05
+	 Train Accuracy: 0.07
+	 Validation Loss: 0.03
+	 Validation Accuracy: 0.09
+-------------------------------------------
+family_Mammalia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.03
+	 Train Accuracy: 0.30
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.78
+-------------------------------------------
+family_Reptilia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.01
+	 Train Accuracy: 0.33
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.00
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.11
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.15
+	 Validation Accuracy: 0.99
+-------------------------------------------
+Epoch 10:
+	 Train Loss: 0.02
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.05
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.05
+	 Train Accuracy: 0.95
+	 Validation Loss: 0.03
+	 Validation Accuracy: 1.00
+-------------------------------------------
+Epoch 10:
+	 Train Loss: 0.01
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.02
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00

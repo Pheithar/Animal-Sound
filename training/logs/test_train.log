@@ -1,0 +1,80 @@
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.09
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.09
+	 Validation Accuracy: 0.99
+-------------------------------------------
+phylum
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.08
+	 Train Accuracy: 0.99
+	 Validation Loss: 0.08
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Arthropoda
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.05
+	 Train Accuracy: 0.85
+	 Validation Loss: 0.04
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Arachnida
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00
+-------------------------------------------
+family_Insecta
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.04
+	 Train Accuracy: 0.40
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.99
+-------------------------------------------
+class_Chordata
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.22
+	 Train Accuracy: 0.86
+	 Validation Loss: 0.19
+	 Validation Accuracy: 0.86
+-------------------------------------------
+family_Amphibia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.03
+	 Train Accuracy: 0.31
+	 Validation Loss: 0.01
+	 Validation Accuracy: 0.86
+-------------------------------------------
+family_Aves
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.10
+	 Train Accuracy: 0.03
+	 Validation Loss: 0.04
+	 Validation Accuracy: 0.09
+-------------------------------------------
+family_Mammalia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.08
+	 Train Accuracy: 0.06
+	 Validation Loss: 0.02
+	 Validation Accuracy: 0.03
+-------------------------------------------
+family_Reptilia
+-------------------------------------------
+Epoch 1:
+	 Train Loss: 0.02
+	 Train Accuracy: 1.00
+	 Validation Loss: 0.00
+	 Validation Accuracy: 1.00

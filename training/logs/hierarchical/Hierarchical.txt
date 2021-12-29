@@ -1,0 +1,2 @@
+train accuracy, test accuracy
+0.1110080395794694, 0.10030864197530863
