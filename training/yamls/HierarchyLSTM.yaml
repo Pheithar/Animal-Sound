@@ -12,7 +12,7 @@ net_organization:
 
 node_params:
   phylum:
-    type: CNN
+    type: LSTM
     epochs: 15
     lr: 0.001
     order: []
@@ -21,7 +21,7 @@ node_params:
     pth_file: ./networks/hierarchical/phylum.pth
 
   class_Arthropoda:
-    type: CNN
+    type: LSTM
     epochs: 15
     lr: 0.001
     order: [Arthropoda]
@@ -30,7 +30,7 @@ node_params:
     pth_file: ./networks/hierarchical/class_Arthropoda.pth
 
   family_Arachnida:
-    type: CNN
+    type: LSTM
     epochs: 15
     lr: 0.001
     order: [Arthropoda, Arachnida]
@@ -39,7 +39,7 @@ node_params:
     pth_file: ./networks/hierarchical/family_Arachnida.pth
 
   family_Insecta:
-    type: CNN
+    type: LSTM
     epochs: 15
     lr: 0.001
     order: [Arthropoda, Insecta]
@@ -48,7 +48,7 @@ node_params:
     pth_file: ./networks/hierarchical/family_Insecta.pth
 
   class_Chordata:
-    type: CNN
+    type: LSTM
     epochs: 15
     lr: 0.001
     order: [Chordata]
@@ -57,7 +57,7 @@ node_params:
     pth_file: ./networks/hierarchical/class_Chordata.pth
 
   family_Actinopterygii:
-    type: CNN
+    type: LSTM
     epochs: 15
     lr: 0.001
     order: [Chordata, Actinopterygii]
@@ -66,7 +66,7 @@ node_params:
     pth_file: ./networks/hierarchical/family_Actinopterygii.pth
 
   family_Amphibia:
-    type: CNN
+    type: LSTM
     epochs: 15
     lr: 0.001
     order: [Chordata, Amphibia]
@@ -75,7 +75,7 @@ node_params:
     pth_file: ./networks/hierarchical/family_Amphibia.pth
 
   family_Aves:
-    type: CNN
+    type: LSTM
     epochs: 15
     lr: 0.001
     order: [Chordata, Aves]
@@ -84,7 +84,7 @@ node_params:
     pth_file: ./networks/hierarchical/family_Aves.pth
 
   family_Mammalia:
-    type: CNN
+    type: LSTM
     epochs: 15
     lr: 0.001
     order: [Chordata, Mammalia]
@@ -93,7 +93,7 @@ node_params:
     pth_file: ./networks/hierarchical/family_Mammalia.pth
 
   family_Reptilia:
-    type: CNN
+    type: LSTM
     epochs: 15
     lr: 0.001
     order: [Chordata, Reptilia]
@@ -105,101 +105,91 @@ node_params:
 
 net_architecture:
   phylum:
-    input_shape: [3, 1024, 256]
-    conv_channels: [8, 16, 32, 64, 64, 128]
-    conv_kernel_size: [2, 2, 2, 2, 2, 2]
-    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
-    conv_dropout: [0.0, 0.0, 0.2, 0.2, 0.0, 0.0]
+    input_size: 17954
+    hidden_size: 1024
+    num_layers: 2
+    lstm_dropout: 0.2
     linear_features: [64, 2]
     linear_dropout: [0.4]
     last_layer_activation: Sigmoid()
 
   class_Arthropoda:
-    input_shape: [3, 1024, 256]
-    conv_channels: [8, 16, 32, 64, 64, 128]
-    conv_kernel_size: [2, 2, 2, 2, 2, 2]
-    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
-    conv_dropout: [0.0, 0.0, 0.2, 0.2, 0.0, 0.0]
+    input_size: 17954
+    hidden_size: 1024
+    num_layers: 2
+    lstm_dropout: 0.2
     linear_features: [64, 2]
     linear_dropout: [0.4]
     last_layer_activation: Sigmoid()
 
   family_Arachnida:
-    input_shape: [3, 1024, 256]
-    conv_channels: [8, 16, 32, 64, 64, 128]
-    conv_kernel_size: [2, 2, 2, 2, 2, 2]
-    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
-    conv_dropout: [0.0, 0.0, 0.2, 0.2, 0.0, 0.0]
+    input_size: 17954
+    hidden_size: 1024
+    num_layers: 2
+    lstm_dropout: 0.2
     linear_features: [64, 1]
     linear_dropout: [0.4]
     last_layer_activation: Sigmoid()
 
   family_Insecta:
-    input_shape: [3, 1024, 256]
-    conv_channels: [8, 16, 32, 64, 64, 128]
-    conv_kernel_size: [2, 2, 2, 2, 2, 2]
-    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
-    conv_dropout: [0.0, 0.0, 0.2, 0.2, 0.0, 0.0]
+    input_size: 17954
+    hidden_size: 1024
+    num_layers: 2
+    lstm_dropout: 0.2
     linear_features: [64, 14]
     linear_dropout: [0.4]
     last_layer_activation: Sigmoid()
 
   class_Chordata:
-    input_shape: [3, 1024, 256]
-    conv_channels: [8, 16, 32, 64, 64, 128]
-    conv_kernel_size: [2, 2, 2, 2, 2, 2]
-    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
-    conv_dropout: [0.0, 0.0, 0.2, 0.2, 0.0, 0.0]
+    input_size: 17954
+    hidden_size: 1024
+    num_layers: 2
+    lstm_dropout: 0.2
     linear_features: [64, 5]
     linear_dropout: [0.4]
     last_layer_activation: Sigmoid()
 
   family_Actinopterygii:
-    input_shape: [3, 1024, 256]
-    conv_channels: [8, 16, 32, 64, 64, 128]
-    conv_kernel_size: [2, 2, 2, 2, 2, 2]
-    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
-    conv_dropout: [0.0, 0.0, 0.2, 0.2, 0.0, 0.0]
+    input_size: 17954
+    hidden_size: 1024
+    num_layers: 2
+    lstm_dropout: 0.2
     linear_features: [64, 1]
     linear_dropout: [0.4]
     last_layer_activation: Sigmoid()
 
   family_Amphibia:
-    input_shape: [3, 1024, 256]
-    conv_channels: [8, 16, 32, 64, 64, 128]
-    conv_kernel_size: [2, 2, 2, 2, 2, 2]
-    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
-    conv_dropout: [0.0, 0.0, 0.2, 0.2, 0.0, 0.0]
+    input_size: 17954
+    hidden_size: 1024
+    num_layers: 2
+    lstm_dropout: 0.2
     linear_features: [64, 11]
     linear_dropout: [0.4]
     last_layer_activation: Sigmoid()
 
   family_Aves:
-    input_shape: [3, 1024, 256]
-    conv_channels: [8, 16, 32, 64, 64, 128]
-    conv_kernel_size: [2, 2, 2, 2, 2, 2]
-    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
-    conv_dropout: [0.0, 0.0, 0.2, 0.2, 0.0, 0.0]
+    input_size: 17954
+    hidden_size: 1024
+    num_layers: 2
+    lstm_dropout: 0.2
     linear_features: [64, 150]
     linear_dropout: [0.4]
     last_layer_activation: Sigmoid()
 
   family_Mammalia:
-    input_shape: [3, 1024, 256]
-    conv_channels: [8, 16, 32, 64, 64, 128]
-    conv_kernel_size: [2, 2, 2, 2, 2, 2]
-    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
-    conv_dropout: [0.0, 0.0, 0.2, 0.2, 0.0, 0.0]
+    input_size: 17954
+    hidden_size: 1024
+    num_layers: 2
+    lstm_dropout: 0.2
     linear_features: [64, 53]
     linear_dropout: [0.4]
     last_layer_activation: Sigmoid()
 
   family_Reptilia:
-    input_shape: [3, 1024, 256]
-    conv_channels: [8, 16, 32, 64, 64, 128]
-    conv_kernel_size: [2, 2, 2, 2, 2, 2]
-    pooling_size: [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
-    conv_dropout: [0.0, 0.0, 0.2, 0.2, 0.0, 0.0]
+    input_size: 17954
+    hidden_size: 1024
+    num_layers: 2
+    lstm_dropout: 0.2
     linear_features: [64, 2]
     linear_dropout: [0.4]
     last_layer_activation: Sigmoid()
