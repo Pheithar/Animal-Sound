@@ -11,16 +11,20 @@ import torch.optim as optim
 
 from tabulate import tabulate
 
+from tqdm import tqdm
+
 class HierarchicalClassification():
     """HierarchicalClassification."""
 
     def __init__(self, nets_arch: dict, node_params: dict,
                  nets_organization: dict, dataset, random_seed: int = 42,
-                 batch_size: int = 8, test_percentage: float = .2):
+                 batch_size: int = 8, test_percentage: float = .2,
+                 load: bool = False):
         """params:
         nets_arch: architecture of each of the network of the tree
         nets_organization: organization of the tree
         """
+        self.load = load
         self.organization = nets_organization
         self.architectures = nets_arch
         self.node_params = node_params
@@ -28,6 +32,7 @@ class HierarchicalClassification():
         self.nodes = self.get_nodes(self.root)
 
         self.dataset = dataset
+
 
         test_len = int((len(dataset) * test_percentage))
         train_len = len(dataset) - test_len
@@ -46,14 +51,14 @@ class HierarchicalClassification():
                 child_nodes = self.build_tree(value)
 
                 node = HierarchicalNode(key, child_nodes, self.architectures[key],
-                                        self.node_params[key])
+                                        self.node_params[key], self.load)
                 nodes.append(node)
 
             return nodes
 
         for node in organization:
             nodes.append(HierarchicalNode(node, [], self.architectures[node],
-                                          self.node_params[node]))
+                         self.node_params[node], self.load))
 
         return nodes
 
@@ -84,15 +89,22 @@ class HierarchicalClassification():
             self.dataset.set_order(node.order)
             node.fit(self.train_loader, self.test_loader)
 
+        print("Calculatin train accuracy...")
         train_acc = 0
-        for x in self.train_loader:
+        for x in tqdm(self.train_loader, desc="Calculatin train accuracy"):
             train_acc += self.predict(x)/len(self.train_loader)
+        print("Done")
 
         test_acc = 0
-        for x in self.train_loader:
+        print("Calculatin test accuracy...")
+        for x in tqdm(self.test_loader, desc="Calculatin test accuracy"):
             test_acc += self.predict(x)/len(self.test_loader)
-
+        print("Done")
         return train_acc, test_acc
+
+    def save(self):
+        for node in self.nodes:
+            node.save()
 
 
     def predict(self, x):
@@ -106,7 +118,7 @@ class HierarchicalClassification():
             label = None
             order = None
             for items in predictions:
-                if items["value"][i] > max_value:
+                if items["value"][i] >= max_value:
                     max_value = items["value"][i]
                     label = items["label"][i]
                     order = items["order"][-1]
@@ -121,10 +133,39 @@ class HierarchicalClassification():
 
         return acc
 
+    def get_label(self, x):
+
+        predictions = self.root.predict(x, self.dataset.labels).values()
+        size = list(predictions)[0]["value"].shape[0]
+
+        labels = []
+
+        for i in range(size):
+            max_value = 0
+            label = None
+            order = None
+            for items in predictions:
+                if items["value"][i] >= max_value:
+                    max_value = items["value"][i]
+                    label = items["label"][i]
+                    order = items["order"][-1]
+
+            predict_class = self.dataset.order_hierarchy[order][label]
+            predict_label = np.argmax(self.dataset.flatten_labels[predict_class])
+            real_label = np.argmax(x["leaf_label"][i])
+
+            labels.append([int(real_label), predict_label])
+        return labels
+
+    def load(self):
+        for node in self.nodes:
+            node.load()
+
 class HierarchicalNode():
     """docstring for HierarchicalNode."""
 
-    def __init__(self, name: str, childs, net_arch: dict, params: dict):
+    def __init__(self, name: str, childs, net_arch: dict,
+                 params: dict, load: bool):
 
         self.name = name
         self.childs = childs
@@ -133,11 +174,15 @@ class HierarchicalNode():
         self.lr = params["lr"]
         self.log_file = params["log_file"]
         self.img_file = params["img_file"]
+        self.pth_file = params["pth_file"]
         self.type = params["type"]
 
-        if self.type == "CNN":
+        if load:
+            self.load()
+
+        if self.type == "CNN" and not load:
             self.net = utils.cuda_network(SimpleCNN(net_arch))
-        if self.type == "LSTM":
+        if self.type == "LSTM" and not load:
             self.net = utils.cuda_network(SimpleLSTM(net_arch))
 
     def forward(self, x):
@@ -212,3 +257,15 @@ class HierarchicalNode():
             child.calculate_output(x, labels, value=new_value, output=output[self.name])
 
         return output
+
+    def save(self):
+        torch.save(self.net, self.pth_file)
+
+    def load(self):
+        if torch.cuda.device_count():
+          self.net = torch.load(self.pth_file, map_location=torch.device('cuda:0'))
+        else:
+          self.net = torch.load(self.pth_file, map_location=torch.device('cpu'))
+
+        print(f"Loaded from {self.pth_file}:")
+        print(self.net.eval())

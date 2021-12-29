@@ -100,7 +100,7 @@ class SimpleLSTM(nn.Module):
 
         fig, (loss_ax, acc_ax) = plt.subplots(2, 1, figsize=(12, 10))
 
-        for epoch in tqdm(range(num_epochs)):
+        for epoch in tqdm(range(num_epochs), desc=f"Training {train_name}"):
 
             running_loss = 0.0
             running_accuracy = 0.0
